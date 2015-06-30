@@ -20,7 +20,8 @@
     </licenses>
 
     <scm>
-        <url>scm:git:https://github.com/qaware/heimdall.git</url>
+        <connection>scm:git:https://github.com/qaware/heimdall.git</connection>
+        <url>https://github.com/qaware/heimdall.git</url>
     </scm>
 
     <properties>
