@@ -8,6 +8,13 @@ This library implements a secure and upgradeable password hashing mechanism.
 
 If you are using Maven to build your project, add the following to the `pom.xml` file:
 ```xml
+<repositories>
+    <repository>
+        <id>heimdall-github</id>
+        <url>https://raw.githubusercontent.com/qaware/heimdall/master/repository/</url>
+    </repository>
+</repositories>
+
 <dependencies>
     <dependency>
         <groupId>de.qaware</groupId>
@@ -19,6 +26,12 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 
 In case you are using Gradle to build your project, add the following to the `build.gradle` file:
 ```groovy
+repositories {
+    maven {
+        url 'https://raw.githubusercontent.com/qaware/heimdall/master/repository/'
+    }
+}
+
 dependencies {
 	compile 'de.qaware:heimdall:1.2'
 }
