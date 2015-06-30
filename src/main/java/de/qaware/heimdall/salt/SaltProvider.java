@@ -23,42 +23,17 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
-
-import de.qaware.securepassword.algorithm.HashAlgorithm;
-import de.qaware.securepassword.algorithm.HashAlgorithmRegistryImpl;
-import de.qaware.securepassword.algorithm.PBKDF2;
-import de.qaware.securepassword.config.ConfigCoderImpl;
-import de.qaware.securepassword.salt.SecureSaltProvider;
+package de.qaware.heimdall.salt;
 
 /**
- * Factory to create an instance of {@link Password}.
+ * Provides salt.
  */
-public final class PasswordFactory {
+public interface SaltProvider {
     /**
-     * PBKDF#2.
-     */
-    private static final HashAlgorithm PBKDF2 = new PBKDF2();
-
-    /**
-     * Singleton instance.
-     */
-    private static Password password = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(
-            PBKDF2
-    ), PBKDF2);
-
-    /**
-     * Static class - no instances allowed.
-     */
-    private PasswordFactory() {
-    }
-
-    /**
-     * Creates an instance of {@link Password}.
+     * Creates a new salt with the given size.
      *
-     * @return An instance of {@link Password}.
+     * @param sizeInBits Size in bits.
+     * @return Created salt.
      */
-    public static Password create() {
-        return password;
-    }
+    byte[] create(int sizeInBits);
 }

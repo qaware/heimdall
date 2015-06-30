@@ -23,27 +23,12 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.config;
+
+import java.util.HashMap;
 
 /**
- * Is thrown if something in the hash algorithm fails.
+ * Hash algorithm configuration.
  */
-public class AlgorithmException extends Exception {
-    /**
-     * Constructor.
-     *
-     * @param message Message.
-     */
-    public AlgorithmException(String message) {
-        super(message);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param cause Cause.
-     */
-    public AlgorithmException(Throwable cause) {
-        super(cause);
-    }
+public class HashAlgorithmConfig extends HashMap<String, String> {
 }

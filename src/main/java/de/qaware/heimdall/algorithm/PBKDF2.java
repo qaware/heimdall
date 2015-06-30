@@ -23,10 +23,10 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.algorithm;
 
 import com.google.common.base.Preconditions;
-import de.qaware.securepassword.config.HashAlgorithmConfig;
+import de.qaware.heimdall.config.HashAlgorithmConfig;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

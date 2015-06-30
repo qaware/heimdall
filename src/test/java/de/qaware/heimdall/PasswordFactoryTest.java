@@ -23,42 +23,20 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall;
 
-import com.google.common.base.Preconditions;
+import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
 
-/**
- * @author moritz.kammerer
- */
-public class HashAlgorithmRegistryImpl implements HashAlgorithmRegistry {
-    /**
-     * Map from algorithm id to algorithm.
-     */
-    private final Map<Integer, HashAlgorithm> algorithms = new HashMap<Integer, HashAlgorithm>();
+public class PasswordFactoryTest {
+    @Test
+    public void testCreate() throws Exception {
+        Password password = PasswordFactory.create();
 
-    /**
-     * Constructor.
-     *
-     * @param hashAlgorithms Hash algorithms known to the registry.
-     */
-    public HashAlgorithmRegistryImpl(HashAlgorithm... hashAlgorithms) {
-        Preconditions.checkNotNull(hashAlgorithms, "hashAlgorithms");
-
-        for (HashAlgorithm hashAlgorithm : hashAlgorithms) {
-            algorithms.put(hashAlgorithm.getId(), hashAlgorithm);
-        }
-    }
-
-    @Override
-    public HashAlgorithm getAlgorithm(int id) throws AlgorithmException {
-        HashAlgorithm algorithm = algorithms.get(id);
-        if (algorithm == null) {
-            throw new AlgorithmException("Couldn't find algorithm with id " + id);
-        }
-
-        return algorithm;
+        assertThat(password, is(not(nullValue())));
     }
 }

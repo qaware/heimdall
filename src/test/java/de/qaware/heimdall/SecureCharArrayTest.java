@@ -23,7 +23,7 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall;
 
 import org.testng.annotations.Test;
 

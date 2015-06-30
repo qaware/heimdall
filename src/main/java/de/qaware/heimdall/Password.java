@@ -23,10 +23,10 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall;
 
-import de.qaware.securepassword.algorithm.HashAlgorithm;
-import de.qaware.securepassword.config.HashAlgorithmConfig;
+import de.qaware.heimdall.algorithm.HashAlgorithm;
+import de.qaware.heimdall.config.HashAlgorithmConfig;
 
 /**
  * Hashes and verifies passwords.

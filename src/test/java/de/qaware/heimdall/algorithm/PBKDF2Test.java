@@ -23,27 +23,34 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall.algorithm;
 
-/**
- * Is thrown if something with password processing failed.
- */
-public class PasswordException extends Exception {
-    /**
-     * Constructor.
-     *
-     * @param message Message.
-     */
-    public PasswordException(String message) {
-        super(message);
+import de.qaware.heimdall.config.HashAlgorithmConfig;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
+public class PBKDF2Test {
+    @Test
+    public void testHash() throws Exception {
+        PBKDF2 sut = new PBKDF2();
+
+        byte[] salt = new byte[]{1, 2, 3, 4, 5};
+        HashAlgorithmConfig config = sut.getDefaultConfig();
+
+        byte[] hash = sut.hash("password".toCharArray(), salt, config);
+
+        assertThat(hash.length, is(192 / 8));
+        assertThat(hash, is(new byte[]{30, 114, 81, -80, -94, 52, 104, 98, -111, -3, 26, -84, 54, 37, 64, 37, 33, 77, -120, 29, -63, 82, -110, 60}));
     }
 
-    /**
-     * Constructor.
-     *
-     * @param cause Cause.
-     */
-    public PasswordException(Throwable cause) {
-        super(cause);
+    @Test(expectedExceptions = AlgorithmException.class)
+    public void testIterationConfigDoesntExists() throws Exception {
+        PBKDF2 sut = new PBKDF2();
+
+        byte[] salt = new byte[]{1, 2, 3, 4, 5};
+        HashAlgorithmConfig config = new HashAlgorithmConfig();
+        sut.hash("password".toCharArray(), salt, config);
     }
 }

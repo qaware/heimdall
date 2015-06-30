@@ -23,20 +23,28 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall.salt;
 
-import org.testng.annotations.Test;
+import java.security.SecureRandom;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.core.Is.is;
+/**
+ * Salt provider which uses {@link SecureRandom} for salt creation.
+ */
+public class SecureSaltProvider implements SaltProvider {
+    /**
+     * Secure random generator.
+     */
+    private final SecureRandom random = new SecureRandom();
 
-public class PasswordFactoryTest {
-    @Test
-    public void testCreate() throws Exception {
-        Password password = PasswordFactory.create();
+    @Override
+    public byte[] create(int sizeInBits) {
+        if (sizeInBits % 8 != 0) {
+            throw new IllegalArgumentException("sizeInBits must be divisible by 8");
+        }
 
-        assertThat(password, is(not(nullValue())));
+        byte[] salt = new byte[sizeInBits / 8];
+        random.nextBytes(salt);
+
+        return salt;
     }
 }

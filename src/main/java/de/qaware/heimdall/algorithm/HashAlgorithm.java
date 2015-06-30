@@ -23,9 +23,9 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.algorithm;
 
-import de.qaware.securepassword.config.HashAlgorithmConfig;
+import de.qaware.heimdall.config.HashAlgorithmConfig;
 
 /**
  * A hash algorithm.

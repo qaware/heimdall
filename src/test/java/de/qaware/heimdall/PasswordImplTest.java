@@ -23,17 +23,17 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall;
 
-import de.qaware.securepassword.algorithm.HashAlgorithm;
-import de.qaware.securepassword.algorithm.HashAlgorithmRegistry;
-import de.qaware.securepassword.algorithm.HashAlgorithmRegistryImpl;
-import de.qaware.securepassword.algorithm.PBKDF2;
-import de.qaware.securepassword.config.ConfigCoder;
-import de.qaware.securepassword.config.ConfigCoderImpl;
-import de.qaware.securepassword.config.HashAlgorithmConfig;
-import de.qaware.securepassword.salt.SaltProvider;
-import de.qaware.securepassword.salt.SecureSaltProvider;
+import de.qaware.heimdall.algorithm.HashAlgorithm;
+import de.qaware.heimdall.algorithm.HashAlgorithmRegistry;
+import de.qaware.heimdall.algorithm.HashAlgorithmRegistryImpl;
+import de.qaware.heimdall.algorithm.PBKDF2;
+import de.qaware.heimdall.config.ConfigCoder;
+import de.qaware.heimdall.config.ConfigCoderImpl;
+import de.qaware.heimdall.config.HashAlgorithmConfig;
+import de.qaware.heimdall.salt.SaltProvider;
+import de.qaware.heimdall.salt.SecureSaltProvider;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.is;

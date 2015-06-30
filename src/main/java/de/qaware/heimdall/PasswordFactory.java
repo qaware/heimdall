@@ -23,12 +23,42 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.config;
+package de.qaware.heimdall;
 
-import java.util.HashMap;
+import de.qaware.heimdall.algorithm.HashAlgorithm;
+import de.qaware.heimdall.algorithm.HashAlgorithmRegistryImpl;
+import de.qaware.heimdall.algorithm.PBKDF2;
+import de.qaware.heimdall.config.ConfigCoderImpl;
+import de.qaware.heimdall.salt.SecureSaltProvider;
 
 /**
- * Hash algorithm configuration.
+ * Factory to create an instance of {@link Password}.
  */
-public class HashAlgorithmConfig extends HashMap<String, String> {
+public final class PasswordFactory {
+    /**
+     * PBKDF#2.
+     */
+    private static final HashAlgorithm PBKDF2 = new PBKDF2();
+
+    /**
+     * Singleton instance.
+     */
+    private static Password password = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(
+            PBKDF2
+    ), PBKDF2);
+
+    /**
+     * Static class - no instances allowed.
+     */
+    private PasswordFactory() {
+    }
+
+    /**
+     * Creates an instance of {@link Password}.
+     *
+     * @return An instance of {@link Password}.
+     */
+    public static Password create() {
+        return password;
+    }
 }

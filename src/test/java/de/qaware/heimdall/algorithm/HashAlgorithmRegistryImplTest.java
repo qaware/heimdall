@@ -23,18 +23,26 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.algorithm;
 
-/**
- * Registry for hash algorithms.
- */
-public interface HashAlgorithmRegistry {
-    /**
-     * Returns the algorithm with the given id.
-     *
-     * @param id Id of the algorithm.
-     * @return Algorithm.
-     * @throws AlgorithmException If the algorithm with the given id isn't found.
-     */
-    HashAlgorithm getAlgorithm(int id) throws AlgorithmException;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+public class HashAlgorithmRegistryImplTest {
+    @Test
+    public void testGetAlgorithm() throws Exception {
+        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2());
+
+        HashAlgorithm algorithm = sut.getAlgorithm(new PBKDF2().getId());
+
+        assertThat(algorithm instanceof PBKDF2, is(true));
+    }
+
+    @Test(expectedExceptions = AlgorithmException.class)
+    public void testUnknownAlgorithm() throws Exception {
+        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2());
+        sut.getAlgorithm(-1);
+    }
 }

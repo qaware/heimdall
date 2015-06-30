@@ -23,26 +23,42 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.algorithm;
 
-import org.testng.annotations.Test;
+import com.google.common.base.Preconditions;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import java.util.HashMap;
+import java.util.Map;
 
-public class HashAlgorithmRegistryImplTest {
-    @Test
-    public void testGetAlgorithm() throws Exception {
-        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2());
+/**
+ * @author moritz.kammerer
+ */
+public class HashAlgorithmRegistryImpl implements HashAlgorithmRegistry {
+    /**
+     * Map from algorithm id to algorithm.
+     */
+    private final Map<Integer, HashAlgorithm> algorithms = new HashMap<Integer, HashAlgorithm>();
 
-        HashAlgorithm algorithm = sut.getAlgorithm(new PBKDF2().getId());
+    /**
+     * Constructor.
+     *
+     * @param hashAlgorithms Hash algorithms known to the registry.
+     */
+    public HashAlgorithmRegistryImpl(HashAlgorithm... hashAlgorithms) {
+        Preconditions.checkNotNull(hashAlgorithms, "hashAlgorithms");
 
-        assertThat(algorithm instanceof PBKDF2, is(true));
+        for (HashAlgorithm hashAlgorithm : hashAlgorithms) {
+            algorithms.put(hashAlgorithm.getId(), hashAlgorithm);
+        }
     }
 
-    @Test(expectedExceptions = AlgorithmException.class)
-    public void testUnknownAlgorithm() throws Exception {
-        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2());
-        sut.getAlgorithm(-1);
+    @Override
+    public HashAlgorithm getAlgorithm(int id) throws AlgorithmException {
+        HashAlgorithm algorithm = algorithms.get(id);
+        if (algorithm == null) {
+            throw new AlgorithmException("Couldn't find algorithm with id " + id);
+        }
+
+        return algorithm;
     }
 }

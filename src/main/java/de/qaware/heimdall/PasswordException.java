@@ -23,25 +23,27 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.config;
+package de.qaware.heimdall;
 
 /**
- * Encodes or decodes a config to/from a string.
+ * Is thrown if something with password processing failed.
  */
-public interface ConfigCoder {
+public class PasswordException extends Exception {
     /**
-     * Encodes a given config to a string.
+     * Constructor.
      *
-     * @param config The config to encode.
-     * @return Encoded configuration.
+     * @param message Message.
      */
-    String encode(HashAlgorithmConfig config);
+    public PasswordException(String message) {
+        super(message);
+    }
 
     /**
-     * Decodes a config from a given string.
+     * Constructor.
      *
-     * @param encoded Encoded configuration.
-     * @return Decoded configuration.
+     * @param cause Cause.
      */
-    HashAlgorithmConfig decode(String encoded);
+    public PasswordException(Throwable cause) {
+        super(cause);
+    }
 }

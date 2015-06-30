@@ -23,16 +23,16 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword;
+package de.qaware.heimdall;
 
 import com.google.common.base.Preconditions;
 import com.google.common.io.BaseEncoding;
-import de.qaware.securepassword.algorithm.AlgorithmException;
-import de.qaware.securepassword.algorithm.HashAlgorithm;
-import de.qaware.securepassword.algorithm.HashAlgorithmRegistry;
-import de.qaware.securepassword.config.ConfigCoder;
-import de.qaware.securepassword.config.HashAlgorithmConfig;
-import de.qaware.securepassword.salt.SaltProvider;
+import de.qaware.heimdall.algorithm.AlgorithmException;
+import de.qaware.heimdall.algorithm.HashAlgorithm;
+import de.qaware.heimdall.algorithm.HashAlgorithmRegistry;
+import de.qaware.heimdall.config.ConfigCoder;
+import de.qaware.heimdall.config.HashAlgorithmConfig;
+import de.qaware.heimdall.salt.SaltProvider;
 
 import java.util.Arrays;
 

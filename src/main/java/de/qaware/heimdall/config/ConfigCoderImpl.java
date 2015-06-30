@@ -23,7 +23,7 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.config;
+package de.qaware.heimdall.config;
 
 import com.google.common.base.Preconditions;
 

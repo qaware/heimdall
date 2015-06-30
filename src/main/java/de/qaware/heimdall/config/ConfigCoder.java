@@ -23,17 +23,25 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.salt;
+package de.qaware.heimdall.config;
 
 /**
- * Provides salt.
+ * Encodes or decodes a config to/from a string.
  */
-public interface SaltProvider {
+public interface ConfigCoder {
     /**
-     * Creates a new salt with the given size.
+     * Encodes a given config to a string.
      *
-     * @param sizeInBits Size in bits.
-     * @return Created salt.
+     * @param config The config to encode.
+     * @return Encoded configuration.
      */
-    byte[] create(int sizeInBits);
+    String encode(HashAlgorithmConfig config);
+
+    /**
+     * Decodes a config from a given string.
+     *
+     * @param encoded Encoded configuration.
+     * @return Decoded configuration.
+     */
+    HashAlgorithmConfig decode(String encoded);
 }

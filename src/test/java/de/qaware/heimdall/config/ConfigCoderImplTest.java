@@ -23,27 +23,49 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.salt;
+package de.qaware.heimdall.config;
 
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 import static org.hamcrest.core.Is.is;
 
-public class SecureSaltProviderTest {
+/**
+ * @author moritz.kammerer
+ */
+public class ConfigCoderImplTest {
     @Test
-    public void testCreate() throws Exception {
-        SecureSaltProvider sut = new SecureSaltProvider();
+    public void testEncode() throws Exception {
+        HashAlgorithmConfig config = new HashAlgorithmConfig();
+        config.put("foo", "bar");
+        config.put("foobaz", "42");
 
-        byte[] salt = sut.create(192);
+        ConfigCoderImpl sut = new ConfigCoderImpl();
+        String encoded = sut.encode(config);
 
-        assertThat(salt.length, is(24));
+        String[] split = encoded.split(";");
+        assertThat(split, hasItemInArray("foobaz=42"));
+        assertThat(split, hasItemInArray("foo=bar"));
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testIllegalSaltSize() throws Exception {
-        SecureSaltProvider sut = new SecureSaltProvider();
+    @Test
+    public void testEncodeEmpty() throws Exception {
+        HashAlgorithmConfig config = new HashAlgorithmConfig();
 
-        sut.create(17);
+        ConfigCoderImpl sut = new ConfigCoderImpl();
+        String encoded = sut.encode(config);
+
+        assertThat(encoded, is(""));
+    }
+
+    @Test
+    public void testDecode() throws Exception {
+        ConfigCoderImpl sut = new ConfigCoderImpl();
+        HashAlgorithmConfig config = sut.decode("foobaz=42;foo=bar");
+
+        assertThat(config.size(), is(2));
+        assertThat(config.get("foo"), is("bar"));
+        assertThat(config.get("foobaz"), is("42"));
     }
 }

@@ -23,28 +23,27 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.salt;
-
-import java.security.SecureRandom;
+package de.qaware.heimdall.algorithm;
 
 /**
- * Salt provider which uses {@link SecureRandom} for salt creation.
+ * Is thrown if something in the hash algorithm fails.
  */
-public class SecureSaltProvider implements SaltProvider {
+public class AlgorithmException extends Exception {
     /**
-     * Secure random generator.
+     * Constructor.
+     *
+     * @param message Message.
      */
-    private final SecureRandom random = new SecureRandom();
+    public AlgorithmException(String message) {
+        super(message);
+    }
 
-    @Override
-    public byte[] create(int sizeInBits) {
-        if (sizeInBits % 8 != 0) {
-            throw new IllegalArgumentException("sizeInBits must be divisible by 8");
-        }
-
-        byte[] salt = new byte[sizeInBits / 8];
-        random.nextBytes(salt);
-
-        return salt;
+    /**
+     * Constructor.
+     *
+     * @param cause Cause.
+     */
+    public AlgorithmException(Throwable cause) {
+        super(cause);
     }
 }

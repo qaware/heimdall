@@ -23,34 +23,18 @@
 * THE SOFTWARE.
 * #L%
 */
-package de.qaware.securepassword.algorithm;
+package de.qaware.heimdall.algorithm;
 
-import de.qaware.securepassword.config.HashAlgorithmConfig;
-import org.testng.annotations.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-
-public class PBKDF2Test {
-    @Test
-    public void testHash() throws Exception {
-        PBKDF2 sut = new PBKDF2();
-
-        byte[] salt = new byte[]{1, 2, 3, 4, 5};
-        HashAlgorithmConfig config = sut.getDefaultConfig();
-
-        byte[] hash = sut.hash("password".toCharArray(), salt, config);
-
-        assertThat(hash.length, is(192 / 8));
-        assertThat(hash, is(new byte[]{30, 114, 81, -80, -94, 52, 104, 98, -111, -3, 26, -84, 54, 37, 64, 37, 33, 77, -120, 29, -63, 82, -110, 60}));
-    }
-
-    @Test(expectedExceptions = AlgorithmException.class)
-    public void testIterationConfigDoesntExists() throws Exception {
-        PBKDF2 sut = new PBKDF2();
-
-        byte[] salt = new byte[]{1, 2, 3, 4, 5};
-        HashAlgorithmConfig config = new HashAlgorithmConfig();
-        sut.hash("password".toCharArray(), salt, config);
-    }
+/**
+ * Registry for hash algorithms.
+ */
+public interface HashAlgorithmRegistry {
+    /**
+     * Returns the algorithm with the given id.
+     *
+     * @param id Id of the algorithm.
+     * @return Algorithm.
+     * @throws AlgorithmException If the algorithm with the given id isn't found.
+     */
+    HashAlgorithm getAlgorithm(int id) throws AlgorithmException;
 }
