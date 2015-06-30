@@ -60,6 +60,7 @@
 
     <build>
         <plugins>
+            <!-- Use Java 7 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
@@ -70,4 +71,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Local repository -->
+    <distributionManagement>
+        <repository>
+            <id>local-file</id>
+            <url>${project.baseUri}/repository</url>
+        </repository>
+    </distributionManagement>
 </project>
