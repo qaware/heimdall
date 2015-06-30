@@ -79,7 +79,7 @@ public class SecureCharArray implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         if (disposed) {
             throw new IllegalStateException("Instance has been disposed.");
         }
