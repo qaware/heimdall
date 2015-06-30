@@ -9,6 +9,20 @@
     <version>1.2</version>
     <packaging>jar</packaging>
 
+    <name>QAware Heimdall</name>
+    <description>This library implements a secure and upgradeable password hashing mechanism.</description>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>scm:git:https://github.com/qaware/heimdall.git</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
