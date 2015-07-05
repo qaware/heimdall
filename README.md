@@ -1,6 +1,6 @@
 # Heimdall - Secure Password Hashing
 
-This library implements a secure and upgradeable password hashing mechanism.
+This library implements a secure and upgradeable password hashing mechanism. See [this blog post](http://qaware.blogspot.de/2015/03/secure-password-storage-and.html) for details.
 
 ## Usage
 
