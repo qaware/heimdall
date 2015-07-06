@@ -2,6 +2,13 @@
 
 This library implements a secure and upgradeable password hashing mechanism. See [this blog post](http://qaware.blogspot.de/2015/03/secure-password-storage-and.html) for details.
 
+## Why not just use PBKDF2, scrypt, bcrypt, etc.?
+
+Actually, this library uses these algorithms. But it makes it easier for you: no need to worry about iterations, salt
+generation and the same. And if a flaw is discovered in one of the algorithms, the library makes sure that the hashes
+in your database are automatically updated to a secure format (provided you use the pattern as shown in the usage block
+down below).
+
 ## Usage
 
 ### Dependencies
@@ -54,7 +61,7 @@ dependencies {
     String hash = ... // Load hash from persistent storage
     try(SecureCharArray cleartext = new SecureCharArray(...)) { // Read cleartext password from user
         if (password.verify(cleartext, hash)) {
-            if (password.needsRehash(hash)) {
+            if (password.needsRehash(hash)) { // Check if the hash uses an old hash algorithm, insecure parameters, etc.
                 String newHash = password.hash(cleartext);
                 // Persist the new hash in a database etc...
             }
@@ -65,6 +72,10 @@ dependencies {
         }
     }
 ```
+
+## Technical details
+
+By default this library uses the PBKDF2 SHA-1 HMAC (`PBKDF2WithHmacSHA1`) with 20000 iterations and 192 Bit (24 Byte) of salt.
 
 ## Maintainer
 
