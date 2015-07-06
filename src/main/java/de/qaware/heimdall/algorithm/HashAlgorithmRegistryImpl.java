@@ -23,7 +23,7 @@
 */
 package de.qaware.heimdall.algorithm;
 
-import com.google.common.base.Preconditions;
+import de.qaware.heimdall.util.Preconditions;
 
 import java.util.HashMap;
 import java.util.Map;

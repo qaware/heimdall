@@ -23,8 +23,8 @@
 */
 package de.qaware.heimdall.algorithm;
 
-import com.google.common.base.Preconditions;
 import de.qaware.heimdall.config.HashAlgorithmConfig;
+import de.qaware.heimdall.util.Preconditions;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

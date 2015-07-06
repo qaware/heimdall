@@ -23,7 +23,7 @@
 */
 package de.qaware.heimdall.config;
 
-import com.google.common.base.Preconditions;
+import de.qaware.heimdall.util.Preconditions;
 
 import java.util.Map.Entry;
 

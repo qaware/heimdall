@@ -23,14 +23,14 @@
 */
 package de.qaware.heimdall;
 
-import com.google.common.base.Preconditions;
-import com.google.common.io.BaseEncoding;
 import de.qaware.heimdall.algorithm.AlgorithmException;
 import de.qaware.heimdall.algorithm.HashAlgorithm;
 import de.qaware.heimdall.algorithm.HashAlgorithmRegistry;
 import de.qaware.heimdall.config.ConfigCoder;
 import de.qaware.heimdall.config.HashAlgorithmConfig;
 import de.qaware.heimdall.salt.SaltProvider;
+import de.qaware.heimdall.util.Base64;
+import de.qaware.heimdall.util.Preconditions;
 
 import java.util.Arrays;
 
@@ -200,9 +200,9 @@ public class PasswordImpl implements Password {
         String[] parts = split(hash);
 
         int id = Integer.parseInt(parts[1], RADIX_HEX);
-        byte[] salt = BaseEncoding.base64().decode(parts[2]);
+        byte[] salt = Base64.decode(parts[2]);
         HashAlgorithmConfig config = configCoder.decode(parts[3]);
-        byte[] hashBytes = BaseEncoding.base64().decode(parts[4]);
+        byte[] hashBytes = Base64.decode(parts[4]);
 
         HashAlgorithm hashAlgorithm;
         try {
@@ -274,9 +274,9 @@ public class PasswordImpl implements Password {
 
         String versionAsString = Integer.toHexString(CURRENT_VERSION);
         String idAsString = Integer.toHexString(id);
-        String saltAsString = BaseEncoding.base64().encode(salt);
+        String saltAsString = Base64.encode(salt);
         String configAsString = configCoder.encode(config);
-        String hashAsString = BaseEncoding.base64().encode(hash);
+        String hashAsString = Base64.encode(hash);
 
         return versionAsString + HASH_DELIMITER + idAsString + HASH_DELIMITER + saltAsString + HASH_DELIMITER + configAsString + HASH_DELIMITER + hashAsString;
     }
