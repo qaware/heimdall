@@ -4,7 +4,7 @@ This library implements a secure and upgradeable password hashing mechanism. See
 
 ## Why not just use PBKDF2, scrypt, bcrypt, etc.?
 
-Actually, this library uses these algorithms. But it makes it easier for you: no need to worry about iterations, salt
+Actually, this library uses (some of) these algorithms. But it makes it easier for you: no need to worry about iterations, salt
 generation and the same. And if a flaw is discovered in one of the algorithms, the library makes sure that the hashes
 in your database are automatically updated to a secure format (provided you use the pattern as shown in the usage block
 down below).
