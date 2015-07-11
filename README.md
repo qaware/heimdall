@@ -1,5 +1,7 @@
 # Heimdall - Secure Password Hashing
 
+[![Build Status](https://travis-ci.org/qaware/heimdall.svg?branch=master)](https://travis-ci.org/qaware/heimdall)
+
 This library implements a secure and upgradeable password hashing mechanism. See [this blog post](http://qaware.blogspot.de/2015/03/secure-password-storage-and.html) for details.
 
 ## Why not just use PBKDF2, scrypt, bcrypt, etc.?
