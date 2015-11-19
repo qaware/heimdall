@@ -104,6 +104,7 @@
                     </execution>
                 </executions>
             </plugin>
+			
             <!-- explicitly define maven-deploy-plugin after other to force exec order -->
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -121,7 +122,6 @@
         </plugins>
     </build>
 
-    <!-- Local repository -->
     <distributionManagement>
         <repository>
             <id>bintray</id>
