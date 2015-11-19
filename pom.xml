@@ -124,8 +124,8 @@
     <!-- Local repository -->
     <distributionManagement>
         <repository>
-            <id>local-file</id>
-            <url>${project.baseUri}/repository</url>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/phxql/maven/heimdall</url>
         </repository>
     </distributionManagement>
 </project>

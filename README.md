@@ -19,8 +19,12 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 ```xml
 <repositories>
     <repository>
-        <id>heimdall-github</id>
-        <url>https://raw.githubusercontent.com/qaware/heimdall/master/repository/</url>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-phxql-maven</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/phxql/maven</url>
     </repository>
 </repositories>
 
@@ -37,7 +41,7 @@ In case you are using Gradle to build your project, add the following to the `bu
 ```groovy
 repositories {
     maven {
-        url 'https://raw.githubusercontent.com/qaware/heimdall/master/repository/'
+        url 'http://dl.bintray.com/phxql/maven'
     }
 }
 
