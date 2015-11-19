@@ -24,7 +24,7 @@ If you are using Maven to build your project, add the following to the `pom.xml`
         </snapshots>
         <id>bintray-phxql-maven</id>
         <name>bintray</name>
-        <url>http://dl.bintray.com/phxql/maven</url>
+        <url>https://dl.bintray.com/phxql/maven</url>
     </repository>
 </repositories>
 
@@ -41,7 +41,7 @@ In case you are using Gradle to build your project, add the following to the `bu
 ```groovy
 repositories {
     maven {
-        url 'http://dl.bintray.com/phxql/maven'
+        url 'https://dl.bintray.com/phxql/maven'
     }
 }
 
