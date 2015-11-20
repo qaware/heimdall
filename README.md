@@ -23,9 +23,9 @@ If you are using Maven to build your project, add the following to the `pom.xml`
         <snapshots>
             <enabled>false</enabled>
         </snapshots>
-        <id>bintray-phxql-maven</id>
+        <id>central</id>
         <name>bintray</name>
-        <url>https://dl.bintray.com/phxql/maven</url>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
 
@@ -33,7 +33,7 @@ If you are using Maven to build your project, add the following to the `pom.xml`
     <dependency>
         <groupId>de.qaware</groupId>
         <artifactId>heimdall</artifactId>
-        <version>1.2</version>
+        <version>1.3</version>
     </dependency>
 </dependencies>
 ```
@@ -41,13 +41,11 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 In case you are using Gradle to build your project, add the following to the `build.gradle` file:
 ```groovy
 repositories {
-    maven {
-        url 'https://dl.bintray.com/phxql/maven'
-    }
+    jcenter()
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:1.2'
+	compile 'de.qaware:heimdall:1.3'
 }
 ```
 

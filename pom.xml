@@ -6,7 +6,7 @@
 
     <groupId>de.qaware</groupId>
     <artifactId>heimdall</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>QAware Heimdall</name>
