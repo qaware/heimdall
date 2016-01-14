@@ -1,7 +1,5 @@
 package de.qaware.heimdall.util;
 
-import javax.xml.bind.DatatypeConverter;
-
 /**
  * Base64 encoding.
  */
@@ -21,7 +19,7 @@ public final class Base64 {
     public static byte[] decode(String base64) {
         Preconditions.checkNotNull(base64, "base64");
 
-        return DatatypeConverter.parseBase64Binary(base64);
+        return org.apache.commons.codec.binary.Base64.decodeBase64(base64);
     }
 
     /**
@@ -33,6 +31,6 @@ public final class Base64 {
     public static String encode(byte[] data) {
         Preconditions.checkNotNull(data, "data");
 
-        return DatatypeConverter.printBase64Binary(data);
+        return org.apache.commons.codec.binary.Base64.encodeBase64String(data);
     }
 }
