@@ -126,6 +126,15 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Disable pushing in the relase plugin -->
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <pushChanges>false</pushChanges>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
