@@ -1,6 +1,8 @@
 # Changelog
 
-## [1.4] - not yet released
+## [1.5] - not yet released
+
+## [1.4] - 2016-05-03
 ### Changed
 * Added dependency on commons-codec for Android support. See https://github.com/qaware/heimdall/issues/4
 
