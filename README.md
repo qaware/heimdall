@@ -33,7 +33,7 @@ If you are using Maven to build your project, add the following to the `pom.xml`
     <dependency>
         <groupId>de.qaware</groupId>
         <artifactId>heimdall</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
     </dependency>
 </dependencies>
 ```
@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:1.3'
+	compile 'de.qaware:heimdall:1.4'
 }
 ```
 
