@@ -82,6 +82,10 @@ dependencies {
 
 By default this library uses the PBKDF2 SHA-1 HMAC (`PBKDF2WithHmacSHA1`) with 20000 iterations and 192 bit (24 byte) of salt.
 
+## Useful resources
+
+* Heimdall integration in Spring Security: https://gist.github.com/clboettcher/663bf04cf24ffb0e6e0791b32ee1dc7c
+
 ## Maintainer
 
 Moritz Kammerer (@phxql), <moritz.kammerer@qaware.de>
