@@ -1,7 +1,7 @@
 # Heimdall - Secure Password Hashing
 
 [![Build Status](https://travis-ci.org/qaware/heimdall.svg?branch=master)](https://travis-ci.org/qaware/heimdall)
-[ ![Download](https://api.bintray.com/packages/phxql/maven/heimdall/images/download.svg) ](https://bintray.com/phxql/maven/heimdall/_latestVersion)
+[![Download](https://api.bintray.com/packages/qaware-oss/maven/heimdall/images/download.svg)](https://bintray.com/qaware-oss/maven/heimdall/_latestVersion)
 
 This library implements a secure and upgradeable password hashing mechanism. See [this blog post](http://qaware.blogspot.de/2015/03/secure-password-storage-and.html) for details.
 
@@ -31,9 +31,9 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 
 <dependencies>
     <dependency>
-        <groupId>de.qaware</groupId>
+        <groupId>de.qaware.heimdall</groupId>
         <artifactId>heimdall</artifactId>
-        <version>1.4</version>
+        <version>1.5</version>
     </dependency>
 </dependencies>
 ```
@@ -41,11 +41,12 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 In case you are using Gradle to build your project, add the following to the `build.gradle` file:
 ```groovy
 repositories {
-    jcenter()
+    jcenter()           
+    mavenCentral() 
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:1.4'
+	compile 'de.qaware:heimdall:1.5'
 }
 ```
 
