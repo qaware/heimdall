@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.qaware</groupId>
+    <groupId>de.qaware.heimdall</groupId>
     <artifactId>heimdall</artifactId>
     <version>1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -11,15 +11,22 @@
     <name>QAware Heimdall</name>
     <description>This library implements a secure and upgradeable password hashing mechanism.</description>
 
+    <organization>
+        <name>QAware GmbH</name>
+        <url>https://www.qaware.de</url>
+    </organization>
+
     <licenses>
         <license>
             <name>MIT</name>
             <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
         <connection>scm:git:https://github.com/qaware/heimdall.git</connection>
+        <developerConnection>scm:git:https://github.com/qaware/heimdall.git</developerConnection>
         <url>https://github.com/qaware/heimdall.git</url>
         <tag>HEAD</tag>
     </scm>
@@ -137,10 +144,28 @@
         </plugins>
     </build>
 
+    <developers>
+        <developer>
+            <id>phxql</id>
+            <name>Moritz Kammerer</name>
+            <email>moritz.kammerer@qaware.de</email>
+            <organization>QAware GmbH</organization>
+            <organizationUrl>https://www.qaware.de</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <distributionManagement>
         <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/maven/phxql/maven/heimdall</url>
+            <id>bintray-qaware-oss</id>
+            <url>https://api.bintray.com/maven/qaware-oss/maven/heimdall;publish=1</url>
         </repository>
     </distributionManagement>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/qaware/heimdall/issues</url>
+    </issueManagement>
 </project>

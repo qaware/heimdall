@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.5] - not yet released
+## [1.5] - soon
+### Changed
+* Changed groupId of artifact to `de.qaware.heimdall`
+* Extended pom.xml to comply with Maven Central publishing requirements
+* Changed distribution management to QAware OSS Bintray repository
 
 ## [1.4] - 2016-05-03
 ### Changed
