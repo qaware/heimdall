@@ -1,6 +1,10 @@
-# Changelog
+# Change Log
 
-## [1.5] - soon
+## [1.5.1] - 2017-08-03
+### Changed
+* Fixed pom.xml for Maven Central publication
+
+## [1.5] - 2017-08-03
 ### Changed
 * Changed groupId of artifact to `de.qaware.heimdall`
 * Extended pom.xml to comply with Maven Central publishing requirements

@@ -23,7 +23,7 @@ The JARs are available via JCenter and Maven Central. If you are using Maven to 
     <dependency>
         <groupId>de.qaware.heimdall</groupId>
         <artifactId>heimdall</artifactId>
-        <version>1.5</version>
+        <version>1.5.1</version>
     </dependency>
 </dependencies>
 ```
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:1.5'
+	compile 'de.qaware:heimdall:1.5.1'
 }
 ```
 

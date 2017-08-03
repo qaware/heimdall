@@ -10,6 +10,9 @@
 
     <name>QAware Heimdall</name>
     <description>This library implements a secure and upgradeable password hashing mechanism.</description>
+    <url>https://github.com/qaware/heimdall</url>
+
+    <inceptionYear>2015</inceptionYear>
 
     <organization>
         <name>QAware GmbH</name>
