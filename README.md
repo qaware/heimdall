@@ -17,19 +17,8 @@ down below).
 
 ### Dependencies
 
-If you are using Maven to build your project, add the following to the `pom.xml` file:
+The JARs are available via JCenter and Maven Central. If you are using Maven to build your project, add the following to the `pom.xml` file:
 ```xml
-<repositories>
-    <repository>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>central</id>
-        <name>bintray</name>
-        <url>https://jcenter.bintray.com</url>
-    </repository>
-</repositories>
-
 <dependencies>
     <dependency>
         <groupId>de.qaware.heimdall</groupId>
@@ -42,7 +31,7 @@ If you are using Maven to build your project, add the following to the `pom.xml`
 In case you are using Gradle to build your project, add the following to the `build.gradle` file:
 ```groovy
 repositories {
-    jcenter()           
+    jcenter()    
     mavenCentral()
 }
 
