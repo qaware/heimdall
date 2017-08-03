@@ -5,7 +5,7 @@
 
     <groupId>de.qaware.heimdall</groupId>
     <artifactId>heimdall</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.5.1</version>
     <packaging>jar</packaging>
 
     <name>QAware Heimdall</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:https://github.com/qaware/heimdall.git</connection>
         <developerConnection>scm:git:https://github.com/qaware/heimdall.git</developerConnection>
         <url>https://github.com/qaware/heimdall.git</url>
-        <tag>HEAD</tag>
+        <tag>heimdall-1.5.1</tag>
     </scm>
 
     <properties>
