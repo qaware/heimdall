@@ -72,8 +72,6 @@ public class SecureCharArray implements AutoCloseable {
         if (!disposed) {
             close();
         }
-
-        super.finalize();
     }
 
     @Override

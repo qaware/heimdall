@@ -59,4 +59,21 @@ public class SecureCharArrayTest {
         sut.close();
         sut.close();
     }
+
+    @Test
+    public void testFinalize() throws Throwable {
+        char[] array = "foo".toCharArray();
+        SecureCharArray sut = new SecureCharArray(array);
+        sut.finalize();
+
+        assertThat(array, is("000".toCharArray()));
+    }
+
+    public void testFinallyTwice() throws Throwable {
+        SecureCharArray sut = new SecureCharArray("foo".toCharArray());
+        sut.finalize();
+        sut.finalize();
+
+        // No exception must be thrown
+    }
 }

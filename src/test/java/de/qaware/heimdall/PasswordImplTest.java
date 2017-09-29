@@ -84,13 +84,23 @@ public class PasswordImplTest {
         PasswordImpl sut = createSut();
 
         HashAlgorithmConfig deprecatedConfig = new HashAlgorithmConfig();
-        deprecatedConfig.put(PBKDF2.ITERATIONS_CONFIG_KEY, "1");
+        deprecatedConfig.put(PBKDF2.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2.MINIMUM_ITERATIONS - 1));
         String deprecatedHash = sut.hash("password".toCharArray(), new PBKDF2(), deprecatedConfig);
 
         // Hash is deprecated because iteration count is too low.
         assertThat(sut.needsRehash(deprecatedHash), is(true));
+    }
 
-        assertThat(sut.needsRehash(sut.hash("password".toCharArray())), is(false));
+    @Test
+    public void testMinimalIterations() throws Exception {
+        PasswordImpl sut = createSut();
+
+        HashAlgorithmConfig config = new HashAlgorithmConfig();
+        config.put(PBKDF2.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2.MINIMUM_ITERATIONS));
+        String hash = sut.hash("password".toCharArray(), new PBKDF2(), config);
+
+        // Hash is not deprecated because iteration count is the minimal allowed.
+        assertThat(sut.needsRehash(hash), is(false));
     }
 
     @Test(expectedExceptions = PasswordException.class)

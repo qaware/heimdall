@@ -53,12 +53,12 @@ public class PBKDF2 implements HashAlgorithm {
     /**
      * Default number of iterations.
      */
-    private static final int DEFAULT_ITERATIONS = 20000;
+    public static final int DEFAULT_ITERATIONS = 20000;
 
     /**
      * Minimum number of iterations.
      */
-    private static final int MINIMUM_ITERATIONS = 10000;
+    public static final int MINIMUM_ITERATIONS = 10000;
 
     /**
      * ID of the algorithm.

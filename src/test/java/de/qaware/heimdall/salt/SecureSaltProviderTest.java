@@ -26,6 +26,7 @@ package de.qaware.heimdall.salt;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 
 public class SecureSaltProviderTest {
@@ -36,6 +37,7 @@ public class SecureSaltProviderTest {
         byte[] salt = sut.create(192);
 
         assertThat(salt.length, is(24));
+        assertThat(salt, is(not(new byte[24])));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
