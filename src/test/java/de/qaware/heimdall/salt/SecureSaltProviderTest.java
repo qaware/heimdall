@@ -37,6 +37,7 @@ public class SecureSaltProviderTest {
         byte[] salt = sut.create(192);
 
         assertThat(salt.length, is(24));
+        // Assert that array is not all zeros
         assertThat(salt, is(not(new byte[24])));
     }
 
