@@ -48,7 +48,7 @@ public class PBKDF2 implements HashAlgorithm {
     /**
      * Name of the PBKDF2 algorithm in the Java Security library.
      */
-    private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
+    private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA256";
 
     /**
      * Default number of iterations.

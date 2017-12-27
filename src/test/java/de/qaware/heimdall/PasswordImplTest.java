@@ -66,14 +66,14 @@ public class PasswordImplTest {
         PasswordImpl sut = new PasswordImpl(saltProvider, configCoder, registry, defaultHashAlgorithm);
         String hash = sut.hash("password".toCharArray(), hashAlgorithm, defaultConfig);
 
-        assertThat(hash, is("1:1:AQIDBAU=:config:BQQDAgE="));
+        assertThat(hash, is("2:1:AQIDBAU=:config:BQQDAgE="));
     }
 
     @Test
     public void testVerify() throws Exception {
         PasswordImpl sut = createSut();
         // 'password' hashed with PBKDF2, 20000 iterations
-        String hash = "1:1:3ZuNhoI4vvk+CX1MMCISKToo6EoRNOFE:i=4e20:h/+2yvl0FLu9slPmzdnqvgWeqlEUTQa9";
+        String hash = "2:1:phiU3EgfZQUDGJG/Eq4AuGuKLBPetJ+7:i=4e20:P/n0KVm64f8otqSeKmEqvqAmhOrhU8Q4";
 
         assertThat(sut.verify("password".toCharArray(), hash), is(true));
         assertThat(sut.verify("foobar".toCharArray(), hash), is(false));
@@ -89,6 +89,14 @@ public class PasswordImplTest {
 
         // Hash is deprecated because iteration count is too low.
         assertThat(sut.needsRehash(deprecatedHash), is(true));
+    }
+
+    @Test
+    public void testNeedsRehashDueToOldVersion() throws Exception {
+        PasswordImpl sut = createSut();
+        String oldHash = "1:1:3ZuNhoI4vvk+CX1MMCISKToo6EoRNOFE:i=4e20:h/+2yvl0FLu9slPmzdnqvgWeqlEUTQa9";
+
+        assertThat(sut.needsRehash(oldHash), is(true));
     }
 
     @Test

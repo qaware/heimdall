@@ -40,7 +40,8 @@ public class PBKDF2Test {
         byte[] hash = sut.hash("password".toCharArray(), salt, config);
 
         assertThat(hash.length, is(192 / 8));
-        assertThat(hash, is(new byte[]{30, 114, 81, -80, -94, 52, 104, 98, -111, -3, 26, -84, 54, 37, 64, 37, 33, 77, -120, 29, -63, 82, -110, 60}));
+
+        assertThat(hash, is(new byte[]{-36, -36, 108, -75, 54, 3, 23, 69, -14, -12, 28, -14, 102, -71, -126, -109, 57, -97, -82, 27, -55, -75, 17, 20}));
     }
 
     @Test(expectedExceptions = AlgorithmException.class)
