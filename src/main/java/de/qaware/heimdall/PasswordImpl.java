@@ -236,6 +236,9 @@ class PasswordImpl implements Password {
      * @throws PasswordException If verifying the hash failed.
      */
     private boolean verifyVersion2(char[] cleartext, String hash) throws PasswordException {
+        /* as the overall logic is still the same
+         * this method is only present to keep the structure
+         * so that there's one validation function per version */
         return verifyVersion1(cleartext, hash);
     }
 
