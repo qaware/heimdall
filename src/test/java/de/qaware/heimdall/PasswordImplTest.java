@@ -1,32 +1,29 @@
 /*
-* The MIT License (MIT)
-*
-* Copyright (c) 2015 QAware GmbH
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 QAware GmbH
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package de.qaware.heimdall;
 
-import de.qaware.heimdall.algorithm.HashAlgorithm;
-import de.qaware.heimdall.algorithm.HashAlgorithmRegistry;
-import de.qaware.heimdall.algorithm.HashAlgorithmRegistryImpl;
-import de.qaware.heimdall.algorithm.PBKDF2;
+import de.qaware.heimdall.algorithm.*;
 import de.qaware.heimdall.config.ConfigCoder;
 import de.qaware.heimdall.config.ConfigCoderImpl;
 import de.qaware.heimdall.config.HashAlgorithmConfig;
@@ -40,6 +37,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PasswordImplTest {
+
     @Test
     public void testHash() throws Exception {
         int outputSizeInBits = 192;
@@ -66,14 +64,24 @@ public class PasswordImplTest {
         PasswordImpl sut = new PasswordImpl(saltProvider, configCoder, registry, defaultHashAlgorithm);
         String hash = sut.hash("password".toCharArray(), hashAlgorithm, defaultConfig);
 
-        assertThat(hash, is("2:1:AQIDBAU=:config:BQQDAgE="));
+        assertThat(hash, is("1:1:AQIDBAU=:config:BQQDAgE="));
     }
 
     @Test
-    public void testVerify() throws Exception {
+    public void testVerifyPBKDF_2_SHA1() throws Exception {
         PasswordImpl sut = createSut();
-        // 'password' hashed with PBKDF2, 20000 iterations
-        String hash = "2:1:phiU3EgfZQUDGJG/Eq4AuGuKLBPetJ+7:i=4e20:P/n0KVm64f8otqSeKmEqvqAmhOrhU8Q4";
+        // 'password' hashed with PBKDF2 SHA1, 20000 iterations
+        String hash = "1:1:3ZuNhoI4vvk+CX1MMCISKToo6EoRNOFE:i=4e20:h/+2yvl0FLu9slPmzdnqvgWeqlEUTQa9";
+
+        assertThat(sut.verify("password".toCharArray(), hash), is(true));
+        assertThat(sut.verify("foobar".toCharArray(), hash), is(false));
+    }
+
+    @Test
+    public void testVerifyPBKDF_2_SHA256() throws Exception {
+        PasswordImpl sut = createSut();
+        // 'password' hashed with PBKDF2SHA256, 20000 iterations
+        String hash = "1:2:phiU3EgfZQUDGJG/Eq4AuGuKLBPetJ+7:i=4e20:P/n0KVm64f8otqSeKmEqvqAmhOrhU8Q4";
 
         assertThat(sut.verify("password".toCharArray(), hash), is(true));
         assertThat(sut.verify("foobar".toCharArray(), hash), is(false));
@@ -84,8 +92,8 @@ public class PasswordImplTest {
         PasswordImpl sut = createSut();
 
         HashAlgorithmConfig deprecatedConfig = new HashAlgorithmConfig();
-        deprecatedConfig.put(PBKDF2.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2.MINIMUM_ITERATIONS - 1));
-        String deprecatedHash = sut.hash("password".toCharArray(), new PBKDF2(), deprecatedConfig);
+        deprecatedConfig.put(PBKDF2SHA256.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2SHA256.MINIMUM_ITERATIONS - 1));
+        String deprecatedHash = sut.hash("password".toCharArray(), new PBKDF2SHA256(), deprecatedConfig);
 
         // Hash is deprecated because iteration count is too low.
         assertThat(sut.needsRehash(deprecatedHash), is(true));
@@ -104,8 +112,8 @@ public class PasswordImplTest {
         PasswordImpl sut = createSut();
 
         HashAlgorithmConfig config = new HashAlgorithmConfig();
-        config.put(PBKDF2.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2.MINIMUM_ITERATIONS));
-        String hash = sut.hash("password".toCharArray(), new PBKDF2(), config);
+        config.put(PBKDF2SHA256.ITERATIONS_CONFIG_KEY, Integer.toHexString(PBKDF2SHA256.MINIMUM_ITERATIONS));
+        String hash = sut.hash("password".toCharArray(), new PBKDF2SHA256(), config);
 
         // Hash is not deprecated because iteration count is the minimal allowed.
         assertThat(sut.needsRehash(hash), is(false));
@@ -137,8 +145,8 @@ public class PasswordImplTest {
     private PasswordImpl createSut() {
         SaltProvider saltProvider = new SecureSaltProvider();
         ConfigCoder configCoder = new ConfigCoderImpl();
-        HashAlgorithmRegistry registry = new HashAlgorithmRegistryImpl(new PBKDF2());
-        HashAlgorithm defaultHashAlgorithm = new PBKDF2();
+        HashAlgorithmRegistry registry = new HashAlgorithmRegistryImpl(new PBKDF2SHA1(), new PBKDF2SHA256());
+        HashAlgorithm defaultHashAlgorithm = new PBKDF2SHA256();
 
         return new PasswordImpl(saltProvider, configCoder, registry, defaultHashAlgorithm);
     }

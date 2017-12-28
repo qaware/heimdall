@@ -29,10 +29,10 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class PBKDF2Test {
+public class PBKDF2SHA256Test {
     @Test
     public void testHash() throws Exception {
-        PBKDF2 sut = new PBKDF2();
+        PBKDF2SHA256 sut = new PBKDF2SHA256();
 
         byte[] salt = new byte[]{1, 2, 3, 4, 5};
         HashAlgorithmConfig config = sut.getDefaultConfig();
@@ -46,7 +46,7 @@ public class PBKDF2Test {
 
     @Test(expectedExceptions = AlgorithmException.class)
     public void testIterationConfigDoesntExists() throws Exception {
-        PBKDF2 sut = new PBKDF2();
+        PBKDF2SHA256 sut = new PBKDF2SHA256();
 
         byte[] salt = new byte[]{1, 2, 3, 4, 5};
         HashAlgorithmConfig config = new HashAlgorithmConfig();

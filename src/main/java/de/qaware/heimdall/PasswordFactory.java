@@ -25,7 +25,8 @@ package de.qaware.heimdall;
 
 import de.qaware.heimdall.algorithm.HashAlgorithm;
 import de.qaware.heimdall.algorithm.HashAlgorithmRegistryImpl;
-import de.qaware.heimdall.algorithm.PBKDF2;
+import de.qaware.heimdall.algorithm.PBKDF2SHA1;
+import de.qaware.heimdall.algorithm.PBKDF2SHA256;
 import de.qaware.heimdall.config.ConfigCoderImpl;
 import de.qaware.heimdall.salt.SecureSaltProvider;
 
@@ -34,16 +35,16 @@ import de.qaware.heimdall.salt.SecureSaltProvider;
  */
 public final class PasswordFactory {
     /**
-     * PBKDF#2.
+     * PBKDF#2 SHA256.
      */
-    private static final HashAlgorithm PBKDF2 = new PBKDF2();
+    private static final HashAlgorithm PBKDF_2_SHA_256 = new PBKDF2SHA256();
+
+    private static final HashAlgorithm PBKDF_2_SHA_1 = new PBKDF2SHA1();
 
     /**
      * Singleton instance.
      */
-    private static Password password = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(
-            PBKDF2
-    ), PBKDF2);
+    private static Password password = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(PBKDF_2_SHA_1, PBKDF_2_SHA_256), PBKDF_2_SHA_256);
 
     /**
      * Static class - no instances allowed.
