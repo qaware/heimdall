@@ -41,7 +41,7 @@ public abstract class PBKDF2 implements HashAlgorithm {
     /**
      * Output size of the hash function in bit.
      */
-    static final int OUTPUT_SIZE_IN_BITS = 192;
+    private static final int OUTPUT_SIZE_IN_BITS = 192;
 
     /**
      * Config key to store the iterations.
@@ -63,7 +63,18 @@ public abstract class PBKDF2 implements HashAlgorithm {
      */
     private static final int RADIX_HEX = 16;
 
-    protected abstract String getAlgorithmKey();
+    private final String algorithmKey;
+    private final int id;
+
+    protected PBKDF2 (int id, String algorithmKey){
+        this.id = id;
+        this.algorithmKey = algorithmKey;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     @Override
     public byte[] hash(char[] password, byte[] salt, HashAlgorithmConfig config) throws AlgorithmException {
@@ -75,13 +86,18 @@ public abstract class PBKDF2 implements HashAlgorithm {
 
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, OUTPUT_SIZE_IN_BITS);
         try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance(getAlgorithmKey());
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithmKey);
             return skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException e) {
             throw new AlgorithmException(e);
         } catch (InvalidKeySpecException e) {
             throw new AlgorithmException(e);
         }
+    }
+
+    @Override
+    public int getOutputSizeInBits() {
+        return OUTPUT_SIZE_IN_BITS;
     }
 
     /**
