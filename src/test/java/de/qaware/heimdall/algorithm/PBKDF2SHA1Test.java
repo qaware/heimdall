@@ -23,24 +23,32 @@
 */
 package de.qaware.heimdall.algorithm;
 
+import de.qaware.heimdall.config.HashAlgorithmConfig;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.Is.is;
 
-public class HashAlgorithmRegistryImplTest {
+public class PBKDF2SHA1Test {
     @Test
-    public void testGetAlgorithm() throws Exception {
-        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2SHA256());
+    public void testHash() throws Exception {
+        HashAlgorithm sut = new PBKDF2SHA1();
 
-        HashAlgorithm algorithm = sut.getAlgorithm(new PBKDF2SHA256().getId());
+        byte[] salt = new byte[]{1, 2, 3, 4, 5};
+        HashAlgorithmConfig config = sut.getDefaultConfig();
 
-        assertThat(algorithm instanceof PBKDF2SHA256, is(true));
+        byte[] hash = sut.hash("password".toCharArray(), salt, config);
+
+        assertThat(hash.length, is(192 / 8));
+        assertThat(hash, is(new byte[]{30, 114, 81, -80, -94, 52, 104, 98, -111, -3, 26, -84, 54, 37, 64, 37, 33, 77, -120, 29, -63, 82, -110, 60}));
     }
 
     @Test(expectedExceptions = AlgorithmException.class)
-    public void testUnknownAlgorithm() throws Exception {
-        HashAlgorithmRegistryImpl sut = new HashAlgorithmRegistryImpl(new PBKDF2SHA256());
-        sut.getAlgorithm(-1);
+    public void testIterationConfigDoesntExists() throws Exception {
+        HashAlgorithm sut = new PBKDF2SHA1();
+
+        byte[] salt = new byte[]{1, 2, 3, 4, 5};
+        HashAlgorithmConfig config = new HashAlgorithmConfig();
+        sut.hash("password".toCharArray(), salt, config);
     }
 }

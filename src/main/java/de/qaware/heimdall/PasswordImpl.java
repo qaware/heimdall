@@ -37,7 +37,7 @@ import java.util.Arrays;
 /**
  * Default implementation for {@link Password}.
  */
-public class PasswordImpl implements Password {
+class PasswordImpl implements Password {
     /**
      * Radix for hex.
      */
