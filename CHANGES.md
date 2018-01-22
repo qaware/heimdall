@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+### Changed
+* Salt is created on Windows platforms with the `Windows-PRNG` algorithm
+
 ## [1.5.1] - 2017-08-03
 ### Changed
 * Fixed pom.xml for Maven Central publication

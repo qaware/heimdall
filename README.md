@@ -81,6 +81,10 @@ By default this library uses the PBKDF2 SHA-1 HMAC (`PBKDF2WithHmacSHA1`) with 2
 
 Moritz Kammerer (@phxql), <moritz.kammerer@qaware.de>
 
+## Contributors
+
+See [the list of contributors](CONTRIBUTORS.md).
+
 ## License
 
 This software is provided under the MIT open source license, read the `LICENSE.txt` file for details.
