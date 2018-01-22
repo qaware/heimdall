@@ -23,6 +23,7 @@
 */
 package de.qaware.heimdall.salt;
 
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
@@ -30,9 +31,33 @@ import java.security.SecureRandom;
  */
 public class SecureSaltProvider implements SaltProvider {
     /**
+     * OS name like 'Windows 10'.
+     */
+    private static final String OS = System.getProperty("os.name");
+
+    /**
      * Secure random generator.
      */
-    private final SecureRandom random = new SecureRandom();
+    private SecureRandom random;
+
+    public SecureSaltProvider() {
+        try {
+            if (isWindows()) {
+                // if the current system is Windows
+                // the native pseudo random number generator should be used to improve security
+                random = SecureRandom.getInstance("Windows-PRNG");
+            } else {
+                random = new SecureRandom();
+            }
+        } catch (NoSuchAlgorithmException e) {
+            // If specific algorithm fails, fallback to default
+            random = new SecureRandom();
+        }
+    }
+
+    private static boolean isWindows() {
+        return OS.startsWith("Windows");
+    }
 
     @Override
     public byte[] create(int sizeInBits) {
