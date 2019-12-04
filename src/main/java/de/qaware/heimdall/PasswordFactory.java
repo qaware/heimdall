@@ -41,7 +41,7 @@ public final class PasswordFactory {
     /**
      * Singleton instance.
      */
-    private static Password password = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(
+    private static final Password INSTANCE = new PasswordImpl(new SecureSaltProvider(), new ConfigCoderImpl(), new HashAlgorithmRegistryImpl(
             PBKDF2
     ), PBKDF2);
 
@@ -57,6 +57,6 @@ public final class PasswordFactory {
      * @return An instance of {@link Password}.
      */
     public static Password create() {
-        return password;
+        return INSTANCE;
     }
 }

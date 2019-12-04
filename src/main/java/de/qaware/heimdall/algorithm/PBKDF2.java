@@ -24,12 +24,12 @@
 package de.qaware.heimdall.algorithm;
 
 import de.qaware.heimdall.config.HashAlgorithmConfig;
-import de.qaware.heimdall.util.Preconditions;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Objects;
 
 /**
  * Implementation of the PBKDF2 algorithm.
@@ -82,7 +82,7 @@ public class PBKDF2 implements HashAlgorithm {
 
     @Override
     public boolean isConfigDeprecated(HashAlgorithmConfig config) throws AlgorithmException {
-        Preconditions.checkNotNull(config, "config");
+        Objects.requireNonNull(config, "config");
 
         int iterations = getIterationsFromConfig(config);
 
@@ -104,9 +104,9 @@ public class PBKDF2 implements HashAlgorithm {
 
     @Override
     public byte[] hash(char[] password, byte[] salt, HashAlgorithmConfig config) throws AlgorithmException {
-        Preconditions.checkNotNull(password, "password");
-        Preconditions.checkNotNull(salt, "salt");
-        Preconditions.checkNotNull(config, "config");
+        Objects.requireNonNull(password, "password");
+        Objects.requireNonNull(salt, "salt");
+        Objects.requireNonNull(config, "config");
 
         int iterations = getIterationsFromConfig(config);
 
@@ -114,9 +114,7 @@ public class PBKDF2 implements HashAlgorithm {
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance(PBKDF2_ALGORITHM);
             return skf.generateSecret(spec).getEncoded();
-        } catch (NoSuchAlgorithmException e) {
-            throw new AlgorithmException(e);
-        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AlgorithmException(e);
         }
     }

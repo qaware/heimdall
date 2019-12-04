@@ -23,10 +23,9 @@
 */
 package de.qaware.heimdall.algorithm;
 
-import de.qaware.heimdall.util.Preconditions;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author moritz.kammerer
@@ -35,7 +34,7 @@ public class HashAlgorithmRegistryImpl implements HashAlgorithmRegistry {
     /**
      * Map from algorithm id to algorithm.
      */
-    private final Map<Integer, HashAlgorithm> algorithms = new HashMap<Integer, HashAlgorithm>();
+    private final Map<Integer, HashAlgorithm> algorithms = new HashMap<>();
 
     /**
      * Constructor.
@@ -43,7 +42,7 @@ public class HashAlgorithmRegistryImpl implements HashAlgorithmRegistry {
      * @param hashAlgorithms Hash algorithms known to the registry.
      */
     public HashAlgorithmRegistryImpl(HashAlgorithm... hashAlgorithms) {
-        Preconditions.checkNotNull(hashAlgorithms, "hashAlgorithms");
+        Objects.requireNonNull(hashAlgorithms, "hashAlgorithms");
 
         for (HashAlgorithm hashAlgorithm : hashAlgorithms) {
             algorithms.put(hashAlgorithm.getId(), hashAlgorithm);

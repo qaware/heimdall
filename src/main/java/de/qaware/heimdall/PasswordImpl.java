@@ -30,9 +30,9 @@ import de.qaware.heimdall.config.ConfigCoder;
 import de.qaware.heimdall.config.HashAlgorithmConfig;
 import de.qaware.heimdall.salt.SaltProvider;
 import de.qaware.heimdall.util.Base64;
-import de.qaware.heimdall.util.Preconditions;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Default implementation for {@link Password}.
@@ -85,15 +85,16 @@ public class PasswordImpl implements Password {
      * @param hashAlgorithmRegistry The hash algorithm registry.
      */
     public PasswordImpl(SaltProvider saltProvider, ConfigCoder configCoder, HashAlgorithmRegistry hashAlgorithmRegistry, HashAlgorithm defaultHashAlgorithm) {
-        this.saltProvider = Preconditions.checkNotNull(saltProvider, "saltProvider");
-        this.configCoder = Preconditions.checkNotNull(configCoder, "configCoder");
-        this.hashAlgorithmRegistry = Preconditions.checkNotNull(hashAlgorithmRegistry, "hashAlgorithmRegistry");
-        this.defaultHashAlgorithm = Preconditions.checkNotNull(defaultHashAlgorithm, "defaultHashAlgorithm");
+        this.saltProvider = Objects.requireNonNull(saltProvider, "saltProvider");
+        this.configCoder = Objects.requireNonNull(configCoder, "configCoder");
+        this.hashAlgorithmRegistry = Objects.requireNonNull(hashAlgorithmRegistry, "hashAlgorithmRegistry");
+        this.defaultHashAlgorithm = Objects.requireNonNull(defaultHashAlgorithm, "defaultHashAlgorithm");
     }
 
     @Override
+    @Deprecated
     public String hash(String cleartext) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
 
         char[] cleartextAsChars = cleartext.toCharArray();
         try {
@@ -110,16 +111,17 @@ public class PasswordImpl implements Password {
 
     @Override
     public String hash(char[] cleartext) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
 
         return hash(cleartext, defaultHashAlgorithm, defaultHashAlgorithm.getDefaultConfig());
     }
 
     @Override
+    @Deprecated
     public String hash(String cleartext, HashAlgorithm hashAlgorithm, HashAlgorithmConfig config) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
-        Preconditions.checkNotNull(hashAlgorithm, "hashAlgorithm");
-        Preconditions.checkNotNull(config, "config");
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(hashAlgorithm, "hashAlgorithm");
+        Objects.requireNonNull(config, "config");
 
         char[] cleartextAsChars = cleartext.toCharArray();
         try {
@@ -136,9 +138,9 @@ public class PasswordImpl implements Password {
 
     @Override
     public String hash(char[] cleartext, HashAlgorithm hashAlgorithm, HashAlgorithmConfig config) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
-        Preconditions.checkNotNull(hashAlgorithm, "hashAlgorithm");
-        Preconditions.checkNotNull(config, "config");
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(hashAlgorithm, "hashAlgorithm");
+        Objects.requireNonNull(config, "config");
 
         int saltSizeInBits = hashAlgorithm.getOutputSizeInBits();
 
@@ -160,9 +162,10 @@ public class PasswordImpl implements Password {
     }
 
     @Override
+    @Deprecated
     public boolean verify(String cleartext, String hash) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
-        Preconditions.checkNotNull(hash, "hash");
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(hash, "hash");
 
         char[] cleartextAsChars = cleartext.toCharArray();
         try {
@@ -174,8 +177,8 @@ public class PasswordImpl implements Password {
 
     @Override
     public boolean verify(char[] cleartext, String hash) throws PasswordException {
-        Preconditions.checkNotNull(cleartext, CLEARTEXT_PARAM);
-        Preconditions.checkNotNull(hash, "hash");
+        Objects.requireNonNull(cleartext, CLEARTEXT_PARAM);
+        Objects.requireNonNull(hash, "hash");
 
         String[] parts = hash.split(HASH_DELIMITER);
 
@@ -222,7 +225,7 @@ public class PasswordImpl implements Password {
 
     @Override
     public boolean needsRehash(String hash) throws PasswordException {
-        Preconditions.checkNotNull(hash, "hash");
+        Objects.requireNonNull(hash, "hash");
 
         String[] parts = split(hash);
 

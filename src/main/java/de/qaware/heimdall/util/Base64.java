@@ -1,5 +1,7 @@
 package de.qaware.heimdall.util;
 
+import java.util.Objects;
+
 /**
  * Base64 encoding.
  */
@@ -17,9 +19,9 @@ public final class Base64 {
      * @return Byte array.
      */
     public static byte[] decode(String base64) {
-        Preconditions.checkNotNull(base64, "base64");
+        Objects.requireNonNull(base64, "base64");
 
-        return org.apache.commons.codec.binary.Base64.decodeBase64(base64);
+        return java.util.Base64.getDecoder().decode(base64);
     }
 
     /**
@@ -29,8 +31,8 @@ public final class Base64 {
      * @return Base64 string.
      */
     public static String encode(byte[] data) {
-        Preconditions.checkNotNull(data, "data");
+        Objects.requireNonNull(data, "data");
 
-        return org.apache.commons.codec.binary.Base64.encodeBase64String(data);
+        return java.util.Base64.getEncoder().encodeToString(data);
     }
 }

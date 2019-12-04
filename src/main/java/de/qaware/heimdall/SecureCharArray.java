@@ -68,7 +68,7 @@ public class SecureCharArray implements AutoCloseable {
     }
 
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize() {
         if (!disposed) {
             close();
         }

@@ -3,6 +3,8 @@
 ## Unreleased
 ### Changed
 * Salt is created on Windows platforms with the `Windows-PRNG` algorithm
+* Java 8 is now required to use Heimdall
+* Removed dependency on common-codec, use native Java 8 Base64 decoder / encoder
 
 ## [1.5.1] - 2017-08-03
 ### Changed

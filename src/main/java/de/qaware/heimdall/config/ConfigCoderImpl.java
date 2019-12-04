@@ -23,9 +23,8 @@
 */
 package de.qaware.heimdall.config;
 
-import de.qaware.heimdall.util.Preconditions;
-
 import java.util.Map.Entry;
+import java.util.Objects;
 
 /**
  * Encodes or decodes a config to/from a string.
@@ -42,7 +41,7 @@ public class ConfigCoderImpl implements ConfigCoder {
 
     @Override
     public String encode(HashAlgorithmConfig config) {
-        Preconditions.checkNotNull(config, "config");
+        Objects.requireNonNull(config, "config");
 
         StringBuilder encoded = new StringBuilder();
 
@@ -63,7 +62,7 @@ public class ConfigCoderImpl implements ConfigCoder {
 
     @Override
     public HashAlgorithmConfig decode(String encoded) {
-        Preconditions.checkNotNull(encoded, "encoded");
+        Objects.requireNonNull(encoded, "encoded");
 
         String[] parts = encoded.split(CONFIG_DELIMITER);
         HashAlgorithmConfig config = new HashAlgorithmConfig();
