@@ -83,7 +83,7 @@ Moritz Kammerer (@phxql), <moritz.kammerer@qaware.de>
 
 ## Contributors
 
-See [the list of contributors](CONTRIBUTORS.md).
+See [the list of contributors](https://github.com/qaware/heimdall/graphs/contributors).
 
 ## License
 
