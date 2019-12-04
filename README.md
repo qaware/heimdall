@@ -23,7 +23,7 @@ The JARs are available via JCenter and Maven Central. If you are using Maven to 
     <dependency>
         <groupId>de.qaware.heimdall</groupId>
         <artifactId>heimdall</artifactId>
-        <version>1.5.1</version>
+        <version>$LATEST_VERSION</version>
     </dependency>
 </dependencies>
 ```
@@ -36,9 +36,11 @@ repositories {
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:1.5.1'
+	compile 'de.qaware:heimdall:$LATEST_VERSION'
 }
 ```
+
+Replace `$LATEST_VERSION` with the version from this badge: [![Download](https://api.bintray.com/packages/qaware-oss/maven/heimdall/images/download.svg)](https://bintray.com/qaware-oss/maven/heimdall/_latestVersion).
 
 ### Create a hash
 ```java
