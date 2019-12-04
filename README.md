@@ -73,6 +73,11 @@ Replace `$LATEST_VERSION` with the version from this badge:
     }
 ```
 
+
+## Changes
+
+Looking for a [change log](CHANGES.md)?
+
 ## Technical details
 
 By default this library uses the PBKDF2 SHA-1 HMAC (`PBKDF2WithHmacSHA1`) with 20000 iterations and 192 bit (24 byte) of salt.
