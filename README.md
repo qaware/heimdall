@@ -40,7 +40,9 @@ dependencies {
 }
 ```
 
-Replace `$LATEST_VERSION` with the version from this badge: [![Download](https://api.bintray.com/packages/qaware-oss/maven/heimdall/images/download.svg)](https://bintray.com/qaware-oss/maven/heimdall/_latestVersion)
+Replace `$LATEST_VERSION` with the version from this badge:
+ 
+[![Download](https://api.bintray.com/packages/qaware-oss/maven/heimdall/images/download.svg)](https://bintray.com/qaware-oss/maven/heimdall/_latestVersion)
 
 ### Create a hash
 ```java
