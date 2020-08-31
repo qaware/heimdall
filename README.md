@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-	compile 'de.qaware:heimdall:$LATEST_VERSION'
+	compile 'de.qaware.heimdall:heimdall:$LATEST_VERSION'
 }
 ```
 
@@ -46,31 +46,31 @@ Replace `$LATEST_VERSION` with the version from this badge:
 
 ### Create a hash
 ```java
-    Password password = PasswordFactory.create();
+Password password = PasswordFactory.create();
 
-    try(SecureCharArray cleartext = new SecureCharArray(...)) { // Read cleartext password from user
-        String hash = password.hash(cleartext);
-        // Persist the hash in a database etc...
-    }
+try(SecureCharArray cleartext = new SecureCharArray(...)) { // Read cleartext password from user
+    String hash = password.hash(cleartext);
+    // Persist the hash in a database etc...
+}
 ```
 
 ### Verify the hash
 ```java
-    Password password = PasswordFactory.create();
+Password password = PasswordFactory.create();
 
-    String hash = ... // Load hash from persistent storage
-    try(SecureCharArray cleartext = new SecureCharArray(...)) { // Read cleartext password from user
-        if (password.verify(cleartext, hash)) {
-            if (password.needsRehash(hash)) { // Check if the hash uses an old hash algorithm, insecure parameters, etc.
-                String newHash = password.hash(cleartext);
-                // Persist the new hash in a database etc...
-            }
-
-            // Password is correct, proceed...
-        } else {
-            // Password is incorrect
+String hash = ... // Load hash from persistent storage
+try(SecureCharArray cleartext = new SecureCharArray(...)) { // Read cleartext password from user
+    if (password.verify(cleartext, hash)) {
+        if (password.needsRehash(hash)) { // Check if the hash uses an old hash algorithm, insecure parameters, etc.
+            String newHash = password.hash(cleartext);
+            // Persist the new hash in a database etc...
         }
+
+        // Password is correct, proceed...
+    } else {
+        // Password is incorrect
     }
+}
 ```
 
 
